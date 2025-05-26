@@ -1,0 +1,44 @@
+# Laravel
+/vendor
+/node_modules
+
+# Laravel storage y cachés
+/storage/*.key
+/storage/*.log
+/storage/framework/cache/data
+/storage/framework/sessions
+/storage/framework/views
+/storage/logs
+/public/storage
+
+# Archivos generados de frontend
+/public/build
+/public/hot
+
+# Entorno (archivos de configuración sensibles)
+.env*
+.env.backup
+
+# PHPUnit
+/.phpunit.cache
+.phpunit.result.cache
+
+# Herramientas y configuración de PHP
+.phpactor.json
+
+# Homestead
+Homestead.json
+Homestead.yaml
+
+# npm/yarn logs
+npm-debug.log
+yarn-error.log
+
+# Composer auth
+/auth.json
+
+# IDEs
+/.idea
+/.vscode
+/.zed
+/.fleet
