@@ -2,6 +2,10 @@
 /vendor
 /node_modules
 
+# Base de datos
+/database/*.sqlite
+/database/*.db
+
 # Laravel storage y cachés
 /storage/*.key
 /storage/*.log
