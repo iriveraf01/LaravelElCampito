@@ -119,8 +119,22 @@
                 @endauth
             </div>
 
-            <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
+            <!-- Hamburger and Mobile Reservation Alert -->
+            <div class="flex items-center sm:hidden">
+                @auth
+                    @if($tieneReservasActivas)
+                        <!-- Alerta de reservas visible en móvil sin abrir menú -->
+                        <a href="{{ route('reservas.index') }}" class="mr-3 relative">
+                            <div class="bg-yellow-100 border border-yellow-400 rounded-full p-1.5 animate-pulse">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">!</span>
+                            </div>
+                        </a>
+                    @endif
+                @endauth
+
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-yellow-700 hover:bg-yellow-50 focus:outline-none focus:bg-yellow-50 focus:text-yellow-700 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -176,8 +190,14 @@
                         </x-responsive-nav-link>
                     @endif
 
-                    <x-responsive-nav-link :href="route('reservas.index')">
-                        {{ __('Ver mis reservas') }}
+                    <!-- Enlace de reservas destacado en móvil si hay reservas activas -->
+                    <x-responsive-nav-link :href="route('reservas.index')" class="{{ $tieneReservasActivas ? 'border-l-4 border-yellow-600 bg-yellow-50 text-yellow-700' : '' }}">
+                        <div class="flex items-center">
+                            {{ __('Ver mis reservas') }}
+                            @if($tieneReservasActivas)
+                                <span class="ml-2 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">!</span>
+                            @endif
+                        </div>
                     </x-responsive-nav-link>
 
                     <form method="POST" action="{{ route('logout') }}">
