@@ -14,8 +14,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/apartamentos/{apartamento}', [ApartamentoController::class, 'show'])->name('apartamentos.show');
-
     Route::get('/reservas', [ReservaController::class, 'index'])->name('reservas.index');
     Route::post('/reservas', [ReservaController::class, 'store'])->name('reservas.store');
     Route::delete('/reservas/{id}/cancelar', [ReservaController::class, 'cancelar'])->name('reservas.cancelar');
@@ -25,6 +23,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/apartamentos', [ApartamentoController::class, 'index'])->name('apartamentos');
+Route::get('/apartamentos/{apartamento}', [ApartamentoController::class, 'show'])->name('apartamentos.show');
 
 Route::get('/restaurante', [RestauranteController::class, 'index'])->name('restaurante');
 
