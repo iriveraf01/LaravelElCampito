@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('precio_racion', 10, 2)->nullable();
             $table->decimal('precio_media_racion', 10, 2)->nullable();
             $table->string('categoria', 50)->nullable();
-            $table->json('imagen')->nullable();
+            $table->string('imagen')->nullable();
             $table->json('alergenos')->nullable();
             $table->string('estilo_preparacion', 50)->nullable();
             $table->timestamps();

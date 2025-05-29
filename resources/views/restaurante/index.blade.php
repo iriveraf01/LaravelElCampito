@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    {{-- Título de la carta con diseño mejorado --}}
+    {{-- Título de la carta --}}
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 mb-12 text-center">
         <a
             href="#seccion-alergenos"
@@ -103,13 +103,13 @@
 
                                         {{-- Precios --}}
                                         <div class="flex flex-wrap gap-2 mb-3">
-                                            @if($plato->precio_racion)
+                                            @if($plato->precio_racion!=0)
                                                 <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">
                                                     Ración: €{{ number_format($plato->precio_racion, 2) }}
                                                 </span>
                                             @endif
 
-                                            @if($plato->precio_media_racion)
+                                            @if($plato->precio_media_racion!=0)
                                                 <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-medium">
                                                     1/2 Ración: €{{ number_format($plato->precio_media_racion, 2) }}
                                                 </span>
@@ -168,7 +168,7 @@
                 </div>
 
                 <div class="bg-yellow-50 rounded-xl p-4 text-center shadow-sm hover:shadow-md transition-shadow">
-                    <img src="{{ asset('images/alergenos/crustáceos.png') }}" alt="Crustáceos" class="max-w-[8rem] max-h-[8rem] mx-auto mb-3 object-contain">
+                    <img src="{{ asset('images/alergenos/crustaceos.png') }}" alt="Crustáceos" class="max-w-[8rem] max-h-[8rem] mx-auto mb-3 object-contain">
                     <h3 class="font-medium text-gray-900">Crustáceos</h3>
                     <p class="text-xs text-gray-600 mt-1">Gambas, langostinos, cangrejos</p>
                 </div>

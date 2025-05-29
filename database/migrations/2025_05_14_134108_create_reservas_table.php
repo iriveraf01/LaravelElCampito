@@ -11,6 +11,29 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('apartamentos', function (Blueprint $table) {
+            $table->id();
+            $table->text('descripcion')->nullable();
+            $table->decimal('precio', 10, 2);
+            $table->integer('capacidad');
+            $table->json('imagenes')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('servicios', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre', 100);
+            $table->string('categoria', 100);
+            $table->timestamps();
+        });
+
+        Schema::create('apartamento_servicio', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('apartamento_id')->constrained('apartamentos')->onDelete('cascade');
+            $table->foreignId('servicio_id')->constrained('servicios')->onDelete('cascade');
+            $table->timestamps();
+        });
+
         Schema::create('reservas', function (Blueprint $table) {
             $table->id();
 
@@ -21,10 +44,10 @@ return new class extends Migration
             // Campos propios
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
+            $table->integer('personas');
             $table->string('estado', 255)->default('pendiente');
             $table->decimal('total', 10, 2)->default(0);
             $table->boolean('disponibilidad')->default(true);
-            $table->integer('personas')->after('fecha_fin');
 
             $table->timestamps();
         });
@@ -35,6 +58,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('apartamentos');
+        Schema::dropIfExists('servicios');
+        Schema::dropIfExists('apartamento_servicio');
         Schema::dropIfExists('reservas');
     }
 };

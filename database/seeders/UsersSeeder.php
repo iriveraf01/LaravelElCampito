@@ -13,6 +13,9 @@ class UsersSeeder extends Seeder
      */
     public function run(): void
     {
+        User::create([
+
+        ]);
         $usuarios = User::all(); // Trae todos los usuarios existentes
 
         foreach ($usuarios as $user) {
