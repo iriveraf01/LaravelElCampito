@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UsersSeeder extends Seeder
 {
@@ -14,12 +15,10 @@ class UsersSeeder extends Seeder
     public function run(): void
     {
         User::create([
-
+            'name' => 'Administrador',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('Hola2003'),
+            'rol' => 'admin',
         ]);
-        $usuarios = User::all(); // Trae todos los usuarios existentes
-
-        foreach ($usuarios as $user) {
-            // Aquí haces lo que quieras con cada usuario
-            echo "Usuario encontrado: {$user->name} ({$user->email})\n";
     }
-}}
+}

@@ -16,6 +16,7 @@ class ReservaController extends Controller
         return view('reservas.index', compact('reservas'));
     }
 
+    // Función para eliminar futuras reservas
     public function cancelar($id)
     {
         $reserva = Reserva::where('id', $id)
@@ -31,6 +32,7 @@ class ReservaController extends Controller
         return redirect()->route('reservas.index')->with('success', 'Reserva cancelada correctamente.');
     }
 
+    // Función para eliminar reservas finalizadas y hacer algo de limpieza
     public function borrar($id)
     {
         $reserva = Reserva::where('id', $id)
@@ -49,6 +51,7 @@ class ReservaController extends Controller
 
     public function store(Request $request)
     {
+        // 1. VALIDACIÓN DE DATOS DEL FORMULARIO
         $request->validate([
             'apartamento_id' => 'required|exists:apartamentos,id',
             'fecha_inicio' => 'required|date|after_or_equal:today',
@@ -56,23 +59,35 @@ class ReservaController extends Controller
             'personas' => 'required|integer|min:1',
         ]);
 
-        $apartamento = Apartamento::findOrFail($request->apartamento_id);
+        // 2. OBTENER EL APARTAMENTO
+        $apartamento = Apartamento::findOrFail($request->apartamento_id); // Busca o falla
 
+        // 3. VALIDAR CAPACIDAD
         if ($request->personas > $apartamento->capacidad) {
             return back()->withErrors(['personas' => 'No se pueden reservar más personas de las permitidas.']);
         }
 
-        // Calcular el total
+        // 4. CÁLCULO DE ESTADÍA (USANDO CARBON)
+        // Carbon es una librería muy popular en PHP/Laravel para el manejo de fechas y horas
+        // en este caso convierte un string a un objeto Carbon que puede ser manipulado
         $inicio = Carbon::parse($request->fecha_inicio);
         $fin = Carbon::parse($request->fecha_fin);
         $noches = $inicio->diffInDays($fin);
 
+        // Alternativa sin Carbon
+        // $inicio = new DateTime($request->fecha_inicio);
+        //$fin = new DateTime($request->fecha_fin);
+        //$noches = $inicio->diff($fin)->days;
+
+        // Validación por seguridad
         if ($noches <= 0) {
             return back()->withErrors(['fecha_fin' => 'La fecha de fin debe ser posterior a la de inicio.']);
         }
 
+        // Cálculo del total a pagar
         $total = $noches * $apartamento->precio;
 
+        //5. CREAR LA RESERVA
         Reserva::create([
             'usuario_id' => auth()->id(),
             'apartamento_id' => $apartamento->id,
@@ -84,6 +99,7 @@ class ReservaController extends Controller
             'personas' => $request->personas
         ]);
 
+        // 6. Happy path (REDIRECCIÓN CON MENSAJE DE ÉXITO)
         return redirect()->route('dashboard')->with('success', 'Reserva realizada con éxito.');
     }
 }

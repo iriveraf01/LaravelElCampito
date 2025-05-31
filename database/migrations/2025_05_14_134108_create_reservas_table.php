@@ -58,9 +58,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('apartamentos');
-        Schema::dropIfExists('servicios');
         Schema::dropIfExists('apartamento_servicio');
         Schema::dropIfExists('reservas');
+        Schema::dropIfExists('apartamentos');
+        Schema::dropIfExists('servicios');
     }
 };

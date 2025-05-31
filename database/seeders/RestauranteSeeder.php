@@ -15,7 +15,7 @@ class RestauranteSeeder extends Seeder
     {
         Restaurante::create([
             'nombre' => 'Restaurante El Campito',
-            'descripcion' => 'Visitanos en: Carretera de La Lapa, KM 1200 Zafra, Badajoz Telefono: 924 55 35 56',
+            'descripcion' => 'Telefono: 924 55 35 56',
             'horario' => 'Horario: De Martes a Domingo desde las 10:00h hasta Cierre Lunes: Descanso',
             'imagenes' => [
                 'images/restaurante/restaurante-interior1.jpg',

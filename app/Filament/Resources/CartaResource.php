@@ -42,10 +42,6 @@ class CartaResource extends Resource
                 ->nullable()
                 ->dehydrated(fn ($state) => filled($state)),
             Forms\Components\TextInput::make('estilo_preparacion')->maxLength(50),
-            Forms\Components\Select::make('restaurante_id')
-                ->relationship('restaurante', 'nombre')
-                ->searchable()
-                ->default(1),
             Forms\Components\TextInput::make('alergenos')
                 ->maxLength(255)
                 ->nullable()

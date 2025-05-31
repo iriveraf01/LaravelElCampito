@@ -12,13 +12,12 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $restaurante = Restaurante::first();
         $apartamento = Apartamento::first();
         $instalacion2 = Instalaciones::skip(1)->first(); // segundo registro
         $instalacion3 = Instalaciones::skip(2)->first(); // tercer registro
         $entorno = Entorno::first();
 
-        return view('dashboard.index', compact('restaurante', 'apartamento','instalacion2', 'instalacion3', 'entorno'));
+        return view('dashboard.index', compact( 'apartamento','instalacion2', 'instalacion3', 'entorno'));
     }
 
 }

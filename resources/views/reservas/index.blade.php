@@ -41,7 +41,6 @@
                 <div class="space-y-6">
                     @foreach ($reservas as $reserva)
                         @php
-                            // Aseguramos que las fechas existan para evitar errores
                             $fechaEntrada = $reserva->fecha_inicio;
                             $fechaSalida = $reserva->fecha_fin;
                             $esProxima = $fechaSalida && now()->lt($fechaSalida);

@@ -20,7 +20,7 @@
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="relative overflow-hidden rounded-2xl shadow-xl group">
                     <img
-                        src="{{ asset('images/instalaciones/instalaciones-alojamiento2.jpg') }}"
+                        src="{{ asset('images/instalaciones/instalaciones-alojamiento3.jpg') }}"
                         alt="Apartamentos"
                         class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-110"
                     >
@@ -56,7 +56,9 @@
                         Restaurante
                         <span class="block h-1 bg-yellow-600 w-24 mt-2"></span>
                     </h2>
-                    <p class="text-gray-700 text-lg mb-8 leading-relaxed">{{ $restaurante->descripcion }}</p>
+                    <p class="text-gray-700 text-lg mb-8 leading-relaxed">
+                        El restaurante El Campito es un acogedor lugar de comida tradicional, ideal para disfrutar de platos caseros en un ambiente rústico y familiar. Destaca por su atención cercana y sabores auténticos que recuerdan a la cocina de siempre.
+                    </p>
                     <a href="{{ route('restaurante') }}" class="group relative inline-flex items-center overflow-hidden rounded-lg bg-yellow-700 px-8 py-3 text-white focus:outline-none">
                         <span class="absolute -end-full transition-all group-hover:end-4">
                             <svg class="h-5 w-5 rtl:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

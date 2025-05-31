@@ -9,10 +9,6 @@ services:
         build:
             context: .
             dockerfile: dockerfile
-        #        volumes:
-        #            -   .env:/app/.env
-        #            -   ./storage:/app/storage  # Montar storage
-        #            -   ./public/images:/app/public/images  # Montar imágenes públicas
         ports:
             -   "9000:8000"
         depends_on:
