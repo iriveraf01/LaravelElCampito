@@ -285,9 +285,11 @@
     </div>
 
     <script>
+        // Convertimos las fechas ocupadas de PHP a JavaScript
         let fechasOcupadas = @json($fechasOcupadas);
-
+        // Cuando la página cargue completamente...
         window.addEventListener('load', function () {
+            // Inicializamos flatpickr en el elemento con ID 'flatpickr-range'
             flatpickr('#flatpickr-range', {
                 mode: 'range',
                 dateFormat: 'Y-m-d',
@@ -295,13 +297,15 @@
                 locale: {
                     rangeSeparator: ' hasta '
                 },
-                disable: fechasOcupadas,
+                disable: fechasOcupadas, // Deshabilita las fechas ya ocupadas
+                // Personalización visual de los días ocupados
                 onDayCreate: function (dObj, dStr, fp, dayElem) {
                     const fechaStr = dayElem.dateObj.toISOString().split('T')[0];
                     if (fechasOcupadas.includes(fechaStr)) {
                         dayElem.classList.add('bg-red-300', 'text-white', 'rounded-full');
                     }
                 },
+                // Cuando cambia la selección de fechas...
                 onChange: function (selectedDates, dateStr, instance) {
                     if (selectedDates.length === 2) {
                         const inicio = instance.formatDate(selectedDates[0], "Y-m-d");
@@ -325,7 +329,8 @@
                         costoSpan.textContent = total.toFixed(2);
                         costoDiv.classList.remove('hidden');
 
-                    } else {
+                    } else {// Si no hay un rango completo seleccionado
+                        // Limpiamos los campos del formulario
                         document.getElementById('fecha_inicio').value = '';
                         document.getElementById('fecha_fin').value = '';
 
