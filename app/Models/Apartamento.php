@@ -22,13 +22,13 @@ class Apartamento extends Model
         'imagenes' => 'array',
     ];
 
-    // 🔗 Relación con reservas
+    // Relación con reservas
     public function reservas()
     {
         return $this->hasMany(Reserva::class);
     }
 
-    // 🔗 Relación muchos a muchos con servicios
+    // Relación muchos a muchos con servicios
     public function servicios(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Servicio::class, 'apartamento_servicio');
