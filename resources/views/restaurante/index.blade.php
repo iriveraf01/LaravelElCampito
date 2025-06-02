@@ -79,7 +79,7 @@
 
                         @foreach($platos as $plato)
                             <div class="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-xl transition duration-300 border border-gray-100">
-                                <div class="flex flex-col sm:flex-row">
+                                <div class="flex flex-col sm:flex-row h-full">
                                     {{-- Imagen --}}
                                     @if($plato->imagen)
                                         <div class="sm:w-1/3 bg-amber-50">

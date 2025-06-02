@@ -16,7 +16,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($apartamentos as $apartamento)
                     <div class="group">
-                        <a href="{{ route('apartamentos.show', $apartamento) }}" class="block">
+                        <a href="{{ route('apartamentos.show', $apartamento) }}" class="block h-full">
                             <div class="bg-white rounded-xl overflow-hidden shadow-lg group-hover:shadow-xl transition-all duration-300 h-full border border-gray-100 group-hover:border-yellow-200">
                                 <!-- Badge de disponibilidad -->
                                 <div class="relative">
