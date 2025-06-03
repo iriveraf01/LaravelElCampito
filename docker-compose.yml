@@ -5,10 +5,10 @@ services:
     # Application
     app:
         container_name: elcampito-app
-#        image: iriveraf01/elcampito-app:1.0
-        build:
-            context: .
-            dockerfile: dockerfile
+        image: iriveraf01/elcampito-app:1.0
+#        build:
+#            context: .
+#            dockerfile: dockerfile
         ports:
             -   "9000:8000"
         depends_on:

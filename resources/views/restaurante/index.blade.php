@@ -5,10 +5,12 @@
     <div class="relative">
         <div class="h-[500px] w-full overflow-hidden">
             <img
+                id="imagenPrincipal"
                 src="{{ asset($restauranteCampito->imagenes[0] ?? '') }}"
                 alt="{{ $restauranteCampito->nombre }}"
-                class="w-full h-full object-cover"
+                class="w-full h-full object-cover transition-opacity duration-300"
             >
+            {{--Gradiente oscuro para que se vea mejor el nombre, descripción...--}}
             <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
         </div>
 
@@ -28,14 +30,12 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-10">
         <div class="flex overflow-x-auto space-x-4 pb-4 scrollbar-hide">
             @foreach($restauranteCampito->imagenes as $index => $imagen)
-                @if($index > 0) {{-- Omitimos la primera imagen que ya está en el hero --}}
                 <img
                     src="{{ asset($imagen) }}"
                     alt="{{ $restauranteCampito->nombre }} - Vista {{ $index }}"
                     class="h-24 w-36 object-cover rounded-lg shadow-md flex-shrink-0 hover:scale-105 transition-transform cursor-pointer"
-                    onclick="document.getElementById('mainImage').src = '{{ asset($imagen) }}'"
+                    onclick="cambiarImagenEstatica('{{ asset($imagen) }}')"
                 >
-                @endif
             @endforeach
         </div>
     </div>
@@ -290,13 +290,18 @@
     </style>
 
     <script>
-        // Script para manejar la imagen principal
-        document.addEventListener('DOMContentLoaded', function() {
-            // Inicializar con la primera imagen
-            const mainImage = document.getElementById('mainImage');
-            if (mainImage) {
-                // Ya está inicializado en el HTML
-            }
-        });
+        function cambiarImagenEstatica(imagen) {
+            // Cambiar la imagen principal
+            const imagenPrincipal = document.getElementById('imagenPrincipal');
+
+            // Aplicar efecto de transición
+            imagenPrincipal.classList.add('opacity-50');
+
+            // Pequeña transición
+            setTimeout(() => {
+                imagenPrincipal.src = imagen;
+                imagenPrincipal.classList.remove('opacity-50');
+            }, 150);
+        }
     </script>
 </x-app-layout>

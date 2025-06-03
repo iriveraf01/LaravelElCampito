@@ -5,7 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ApartamentoResource\Pages;
 use App\Filament\Resources\ApartamentoResource\RelationManagers;
 use App\Models\Apartamento;
+use App\Models\Servicio;
 use Filament\Forms;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
@@ -51,9 +53,24 @@ class ApartamentoResource extends Resource
                     ->directory('apartamentos')
                     ->disk('public')
                     ->columnSpan(2)
-                    ->dehydrated(true) // importante: para guardar el valor actualizado
-                    ->formatStateUsing(fn ($state) => is_array($state) ? $state : []) // asegura que se procese correctamente
-                    ->storeFiles() // hace que almacene archivos y devuelva rutas relativas
+                    ->dehydrated(true)
+                    ->formatStateUsing(fn ($state) => is_array($state) ? $state : []),
+                Forms\Components\Select::make('servicio_ids')
+                    ->label('Servicios interiores')
+                    ->multiple()
+                    ->options(
+                        fn () => \App\Models\Servicio::where('categoria', 'interior')->pluck('nombre', 'id')
+                    )
+                    ->searchable()
+                    ->preload()
+                    ->columnSpan(2)
+                    ->afterStateHydrated(function ($component, $state) {
+                        $component->state($component->getRecord()?->servicios->pluck('id')->toArray() ?? []);
+                    })
+                    ->dehydrated(true)
+                    ->saveRelationshipsUsing(function ($record, $state) {
+                        $record->servicios()->sync($state);
+                    })
             ])
         ]);
     }

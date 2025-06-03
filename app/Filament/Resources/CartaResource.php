@@ -40,7 +40,12 @@ class CartaResource extends Resource
                 ->disk('public')
                 ->preserveFilenames()
                 ->nullable()
-                ->dehydrated(fn ($state) => filled($state)),
+                ->previewable(true)
+                ->dehydrated(fn ($state) => filled($state))
+                ->visibility('public')
+                ->openable()
+                ->downloadable()
+                ->hint('Deja vacío para conservar la imagen actual'),
             Forms\Components\TextInput::make('estilo_preparacion')->maxLength(50),
             Forms\Components\TextInput::make('alergenos')
                 ->maxLength(255)
@@ -54,10 +59,9 @@ class CartaResource extends Resource
             Tables\Columns\TextColumn::make('nombre_plato')->sortable()->searchable(),
             Tables\Columns\TextColumn::make('precio_racion')->money('eur'),
             Tables\Columns\TextColumn::make('categoria'),
-            Tables\Columns\TextColumn::make('restaurante.nombre')->label('Restaurante'),
             Tables\Columns\ImageColumn::make('imagen')
                 ->label('Imagen')
-                ->disk('public'),
+                ->url(fn ($record) => asset($record->imagen))
         ])->filters([
             //
         ])->actions([
