@@ -1,11 +1,14 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Mail\NuevaReservaAdminMail;
+use App\Mail\ReservaConfirmadaMail;
 use Illuminate\Http\Request;
 use App\Models\Reserva;
 use App\Models\Apartamento;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ReservaController extends Controller
 {
@@ -88,7 +91,7 @@ class ReservaController extends Controller
         $total = $noches * $apartamento->precio;
 
         //5. CREAR LA RESERVA
-        Reserva::create([
+        $reserva = Reserva::create([
             'usuario_id' => auth()->id(),
             'apartamento_id' => $apartamento->id,
             'fecha_inicio' => $inicio,
@@ -99,7 +102,13 @@ class ReservaController extends Controller
             'personas' => $request->personas
         ]);
 
-        // 6. Happy path (REDIRECCIÓN CON MENSAJE DE ÉXITO)
+        try {
+            Mail::to('iriveraf01@suarezdefigueroa.es')->send(new NuevaReservaAdminMail($reserva));
+        } catch (\Exception $e) {
+            return back()->withErrors(['email' => 'Error enviando email: ' . $e->getMessage()]);
+        }
+
+        // Prueba si llega aquí
         return redirect()->route('dashboard')->with('success', 'Reserva realizada con éxito.');
     }
 }

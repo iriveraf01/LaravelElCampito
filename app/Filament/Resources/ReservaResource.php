@@ -4,6 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ReservaResource\Pages;
 use App\Filament\Resources\ReservaResource\RelationManagers;
+use App\Mail\NuevaReservaAdminMail;
+use App\Mail\ReservaConfirmadaMail;
 use App\Models\Reserva;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -15,6 +17,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Mail;
 
 class ReservaResource extends Resource
 {
@@ -81,8 +84,14 @@ class ReservaResource extends Resource
                     ->color(fn ($record) => $record->estado === 'Confirmada' ? 'warning' : 'success')
                     ->requiresConfirmation()
                     ->action(function ($record) {
-                        $record->estado = $record->estado === 'Confirmada' ? 'Pendiente' : 'Confirmada';
+                        $nuevoEstado = $record->estado === 'Confirmada' ? 'Pendiente' : 'Confirmada';
+                        $record->estado = $nuevoEstado;
                         $record->save();
+
+                        if ($nuevoEstado === 'Confirmada') {
+                            // Enviar email de confirmación al usuario
+                            Mail::to($record->usuario->email)->send(new ReservaConfirmadaMail($record));
+                        }
                     }),
                 Action::make('borrar')
                     ->label('Borrar')
