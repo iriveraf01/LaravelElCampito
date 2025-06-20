@@ -81,7 +81,7 @@
                     @endif
                 </div>
 
-                <!-- Manteniendo x-primary-button pero añadiendo clases para mejorar su apariencia -->
+                <!-- Manteniendo x-primary-button pero añadiendo clases para mejorar su apariencia  -->
                 <x-primary-button class="ms-3 bg-yellow-700 hover:bg-yellow-800 focus:bg-yellow-800 active:bg-yellow-800 focus:ring-yellow-300 inline-flex items-center px-5 py-2.5">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
