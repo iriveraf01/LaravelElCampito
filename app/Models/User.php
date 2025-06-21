@@ -23,6 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'rol',
+        'phone',
     ];
 
     /**
@@ -57,4 +58,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new CustomResetPassword($token));
     }
+
+    public function reservas()
+    {
+        return $this->hasMany(\App\Models\Reserva::class, 'usuario_id');
+    }
+
 }

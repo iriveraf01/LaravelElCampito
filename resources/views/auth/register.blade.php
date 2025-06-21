@@ -57,6 +57,22 @@
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
 
+            <!-- Teléfono -->
+            <div class="mt-4">
+                <x-input-label for="phone" :value="__('Teléfono')" class="text-gray-700 font-medium" />
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <!-- Icono de teléfono -->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-gray-400">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                        </svg>
+                    </div>
+                    <x-text-input id="phone" class="pl-10 py-2.5 block mt-1 w-full rounded-lg border-gray-300 shadow-sm focus:border-yellow-500 focus:ring focus:ring-yellow-200 focus:ring-opacity-50" type="tel" name="phone" :value="old('phone')" autocomplete="tel" placeholder="Ej. 555-123-4567" />
+                </div>
+                <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+            </div>
+
+
             <!-- Password -->
             <div class="mt-4">
                 <x-input-label for="password" :value="__('Contraseña')" class="text-gray-700 font-medium" />

@@ -268,6 +268,11 @@
                 <span class="detail-label">Email:</span>
                 <span class="detail-value">{{ $reserva->usuario->email }}</span>
             </div>
+
+            <div class="detail-row">
+                <span class="detail-label">Teléfono:</span>
+                <span class="detail-value">{{ $reserva->usuario->phone }}</span>
+            </div>
         </div>
 
         <div class="reservation-details">
